@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="5.2.0" />
+    <PackageReference Include="Autofac.Extras.DynamicProxy" Version="5.0.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Protoss.Application.Contracts\Protoss.Application.Contracts.csproj" />
+    <ProjectReference Include="..\Protoss.Application\Protoss.Application.csproj" />
+    <ProjectReference Include="..\Protoss.Core\Protoss.Core.csproj" />
+    <ProjectReference Include="..\Protoss.DataAccess.EF\Protoss.DataAccess.EF.csproj" />
+    <ProjectReference Include="..\Protoss.DataAccess.NH\Protoss.DataAccess.NH.csproj" />
+    <ProjectReference Include="..\Protoss.Domain\Protoss.Domain.csproj" />
+    <ProjectReference Include="..\Protoss.Logging.SeriLog\Protoss.Logging.SeriLog.csproj" />
+    <ProjectReference Include="..\Protoss.Query\Protoss.Query.csproj" />
+  </ItemGroup>
+
+</Project>
