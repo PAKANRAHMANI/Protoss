@@ -50,6 +50,7 @@ namespace Protoss.Config
             _container.RegisterAssemblyTypes(assembly)
                 .Where(a => typeof(IFacadeService).IsAssignableFrom(a))
                 .AsImplementedInterfaces()
+                .EnableInterfaceInterceptors()
                 .InstancePerLifetimeScope();
         }
 

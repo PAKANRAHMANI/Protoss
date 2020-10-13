@@ -1,8 +1,10 @@
-﻿using System.Data.SqlClient;
+﻿using System;
+using System.Data.SqlClient;
 using Autofac;
 using NHibernate;
 using Protoss.Application;
 using Protoss.Application.Contracts;
+using Protoss.Authorization;
 using Protoss.Core;
 using Protoss.Core.Clock;
 using Protoss.Core.Events;
@@ -42,12 +44,19 @@ namespace Protoss.Config
             return this;
         }
         
-        //TODO:aval faght with module neshon dade beshe badesh ef/nh/log/exception handling
-        public ProtossBuilder WithModule(IProtoss Protoss)
+        
+        public ProtossBuilder WithModule(IProtoss protoss)
         {
-            RegisterDependency(Protoss);
+            RegisterDependency(protoss);
             return this;
         }
+        public ProtossBuilder WithAuthorizationModule(Type provider)  
+        {
+            _container.RegisterType(provider).As<IAuthorizationProvider>().InstancePerLifetimeScope();
+            _container.RegisterType<AuthorizationInterceptor>().As<IInterceptor>();
+            return this;
+        }
+
         public ContainerBuilder Build()
         {
             _container.RegisterType<SystemDateTime>().As<IDateTime>().SingleInstance();

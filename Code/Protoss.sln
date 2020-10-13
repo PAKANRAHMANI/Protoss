@@ -33,6 +33,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Src", "Src", "{25A183FD-766
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{164B764B-2856-4EE7-8BC6-2E8EE4AD9320}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Protoss.Authorization", "Src\Protoss.Authorization\Protoss.Authorization.csproj", "{D569A146-FAE1-4C32-B2FC-A735982556A3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -85,6 +87,10 @@ Global
 		{8C0FE58F-C388-4628-ACD0-D9BAF5A0A7C6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AF179CE5-28A8-40AE-AE25-916AA54189BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AF179CE5-28A8-40AE-AE25-916AA54189BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D569A146-FAE1-4C32-B2FC-A735982556A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D569A146-FAE1-4C32-B2FC-A735982556A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D569A146-FAE1-4C32-B2FC-A735982556A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D569A146-FAE1-4C32-B2FC-A735982556A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -102,6 +108,7 @@ Global
 		{5DB600B0-6423-4302-9D73-936B1B1E5809} = {25A183FD-7661-4697-96E4-895E57A64352}
 		{8C0FE58F-C388-4628-ACD0-D9BAF5A0A7C6} = {25A183FD-7661-4697-96E4-895E57A64352}
 		{AF179CE5-28A8-40AE-AE25-916AA54189BB} = {4D7D203F-15A2-4FE9-9472-11FA71A5803D}
+		{D569A146-FAE1-4C32-B2FC-A735982556A3} = {25A183FD-7661-4697-96E4-895E57A64352}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FD22E860-CCCE-47C1-B1BE-51511F2D9BF8}

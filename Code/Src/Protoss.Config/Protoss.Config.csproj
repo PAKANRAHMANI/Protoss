@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Protoss.Application.Contracts\Protoss.Application.Contracts.csproj" />
     <ProjectReference Include="..\Protoss.Application\Protoss.Application.csproj" />
+    <ProjectReference Include="..\Protoss.Authorization\Protoss.Authorization.csproj" />
     <ProjectReference Include="..\Protoss.Core\Protoss.Core.csproj" />
     <ProjectReference Include="..\Protoss.DataAccess.EF\Protoss.DataAccess.EF.csproj" />
     <ProjectReference Include="..\Protoss.DataAccess.NH\Protoss.DataAccess.NH.csproj" />
