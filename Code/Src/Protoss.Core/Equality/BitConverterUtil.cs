@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Protoss.Core
+namespace Protoss.Core.Equality
 {
     public static class BitConverterUtil
     {

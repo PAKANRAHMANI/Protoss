@@ -1,4 +1,5 @@
 ﻿using Protoss.Core;
+using Protoss.Core.Equality;
 
 namespace Protoss.Domain
 {

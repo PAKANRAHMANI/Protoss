@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Protoss.Core.Exceptions;
 
-namespace Protoss.Core
+namespace Protoss.Core.Utilities
 {
     public struct DateRange : IEqualityComparer<DateRange>
     {

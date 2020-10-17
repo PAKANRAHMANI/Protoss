@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Reflection;
-using System.Text;
 
-namespace Protoss.Core
+namespace Protoss.Core.Equality
 {
     public class HashCodeBuilder
     {
