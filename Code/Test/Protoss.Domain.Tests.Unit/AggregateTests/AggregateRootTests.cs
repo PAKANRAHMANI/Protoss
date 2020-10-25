@@ -2,7 +2,7 @@ using System;
 using FluentAssertions;
 using Xunit;
 
-namespace Protoss.Domain.Tests.Unit
+namespace Protoss.Domain.Tests.Unit.AggregateTests
 {
     public class AggregateRootTests
     {

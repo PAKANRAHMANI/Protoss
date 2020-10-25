@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Protoss.Core.Events;
 
-namespace Protoss.Domain.Tests.Unit
+namespace Protoss.Domain.Tests.Unit.AggregateTests
 {
     public class FakePublisher : IEventPublisher
     {
