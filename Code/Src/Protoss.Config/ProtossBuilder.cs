@@ -31,9 +31,10 @@ namespace Protoss.Config
             return this;
         }
 
-        public IBuilder UseEF()
+        public IBuilder UseEF(DomainEventPersistenceBuilder domainEventPersistenceBuilder)
         {
-            _container.RegisterType<EfUnitOfWork>().As<IUnitOfWork>();
+            _container.RegisterInstance<IDomainEventPersistenceBuilder>(domainEventPersistenceBuilder).SingleInstance();
+            _container.RegisterType<EfUnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
             return this;
         }
         public ProtossBuilder WithSeriLog(Serilog.ILogger logger)

@@ -10,10 +10,12 @@ namespace Protoss.DataAccess.EF
     public class EfUnitOfWork : IUnitOfWork
     {
         private readonly DbContext _dbContext;
+        private readonly IDomainEventPersistenceBuilder _eventPersistenceBuilder;
         private IDbContextTransaction _transaction;
-        public EfUnitOfWork(DbContext dbContext)
+        public EfUnitOfWork(DbContext dbContext, IDomainEventPersistenceBuilder eventPersistenceBuilder)
         {
             _dbContext = dbContext;
+            _eventPersistenceBuilder = eventPersistenceBuilder;
         }
         public async Task Begin()
         {
@@ -23,7 +25,8 @@ namespace Protoss.DataAccess.EF
 
         public async Task Commit()
         {
-             await _dbContext.Database.CurrentTransaction.CommitAsync();
+            await new EfDomainEvent(_eventPersistenceBuilder, this._dbContext).Persist();
+            await _dbContext.Database.CurrentTransaction.CommitAsync();
         }
 
         public async Task RollBack()
