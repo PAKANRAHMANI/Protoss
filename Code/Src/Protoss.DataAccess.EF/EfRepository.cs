@@ -9,9 +9,9 @@ namespace Protoss.DataAccess.EF
 {
     public abstract class EfRepository<TKey, T> : IRepository<TKey, T> where T : class, IAggregateRoot
     {
-        protected readonly DbContext _dbContext;
+        protected readonly ProtossDbContext _dbContext;
 
-        protected EfRepository(DbContext dbContext)
+        protected EfRepository(ProtossDbContext dbContext)
         {
             _dbContext = dbContext;
         }

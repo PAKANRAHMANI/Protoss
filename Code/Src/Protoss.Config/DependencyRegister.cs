@@ -22,7 +22,7 @@ namespace Protoss.Config
         {
             _container.RegisterAssemblyTypes(assembly)
                 .As(type => type.GetInterfaces()
-                .Where(interfaceType => interfaceType.IsClosedTypeOf(typeof(ICommandHandler<>))))
+                    .Where(interfaceType => interfaceType.IsClosedTypeOf(typeof(ICommandHandler<>))))
                 .InstancePerLifetimeScope();
         }
 

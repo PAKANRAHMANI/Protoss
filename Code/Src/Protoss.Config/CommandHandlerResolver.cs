@@ -16,7 +16,7 @@ namespace Protoss.Config
         }
         public IEnumerable<ICommandHandler<T>> ResolveHandlers<T>(T command) where T : ICommand
         {
-            return _context.Resolve<IEnumerable<ICommandHandler<T>>>();
+           return _context.Resolve<IEnumerable<ICommandHandler<T>>>();
         }
     }
 }

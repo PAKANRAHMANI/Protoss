@@ -9,9 +9,9 @@ namespace Protoss.DataAccess.EF
 {
     public class EfUnitOfWork : IUnitOfWork
     {
-        private readonly DbContext _dbContext;
+        private readonly ProtossDbContext _dbContext;
         private IDbContextTransaction _transaction;
-        public EfUnitOfWork(DbContext dbContext)
+        public EfUnitOfWork(ProtossDbContext dbContext)
         {
             _dbContext = dbContext;
         }
@@ -24,6 +24,7 @@ namespace Protoss.DataAccess.EF
         public async Task Commit()
         {
             await _dbContext.Database.CurrentTransaction.CommitAsync();
+            await _dbContext.SaveChangesAsync();
         }
 
         public async Task RollBack()

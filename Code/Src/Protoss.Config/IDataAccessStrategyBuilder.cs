@@ -7,7 +7,7 @@ namespace Protoss.Config
     public interface IDataAccessStrategyBuilder
     {
         IBuilder UseNH(SessionFactoryBuilder sessionFactory);
-        IBuilder UseEF(IDomainEventPersistenceBuilder domainEventPersistenceBuilder);
+        IBuilder UseEF();
         ProtossBuilder WithModule(IProtoss Protoss);
     }
 }

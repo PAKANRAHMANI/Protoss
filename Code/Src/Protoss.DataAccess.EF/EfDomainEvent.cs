@@ -11,52 +11,21 @@ using Protoss.Domain;
 
 namespace Protoss.DataAccess.EF
 {
-    public class EfDomainEvent
+    public static class EfDomainEvent 
     {
-        private readonly IDomainEventPersistenceBuilder _eventPersistenceBuilder;
-        private readonly DbContext _dbContext;
-
-        public EfDomainEvent(IDomainEventPersistenceBuilder eventPersistenceBuilder, DbContext dbContext)
+        public static void Persist(ProtossDbContext dbContext)
         {
-            _eventPersistenceBuilder = eventPersistenceBuilder;
-            _dbContext = dbContext;
-        }
-        public async Task Persist()
-        {
-            var domainEntities = this._dbContext.ChangeTracker
+            var aggregateRoots = dbContext.ChangeTracker
                 .Entries<IAggregateRoot>()
+                .Select(a => a.Entity)
                 .ToList();
 
-            var domainEvents = domainEntities
-                .SelectMany(x => x.Entity.GetEvents())
+            var domainEvents = aggregateRoots
+                .SelectMany(aggregateRoot => DomainEventStructureFactory.Create(aggregateRoot.GetEvents()))
                 .ToList();
-            foreach (var @event in domainEvents)
-            {
-                var commandText = _eventPersistenceBuilder.Build();
-                var command = new SqlCommand(commandText);
-                var columns = _eventPersistenceBuilder.GetColumns();
-                AddParametersToCommand(command, @event, columns);
-                command.Connection = this._dbContext.Database.CurrentTransaction.GetDbTransaction().Connection as SqlConnection;
-                command.Transaction = this._dbContext.Database.CurrentTransaction.GetDbTransaction() as SqlTransaction;
-                await command.ExecuteNonQueryAsync();
-            }
-        }
-        private void AddParametersToCommand(SqlCommand command, IDomainEvent @event, Dictionary<string, Func<IDomainEvent, object>> columns)
-        {
-            foreach (var column in columns)
-            {
-                var key = ToParameterName(column.Key);
-                var value = column.Value.Invoke(@event);
-                AddValueNullSafe(command, key, value);
-            }
-        }
-        private string ToParameterName(string parameterKey)
-        {
-            return $"@{parameterKey.ToLower()}";
-        }
-        private void AddValueNullSafe(SqlCommand command, string key, object value)
-        {
-            command.Parameters.AddWithValue(key, value ?? DBNull.Value);
+
+            dbContext.DomainEvents.AddRange(domainEvents);
+            aggregateRoots.ForEach(a => a.ClearEvents());
         }
     }
 }

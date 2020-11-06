@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Data.SqlClient;
 using Autofac;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using NHibernate;
 using Protoss.Application;
@@ -33,14 +32,13 @@ namespace Protoss.Config
             return this;
         }
 
-        public IBuilder UseEF(IDomainEventPersistenceBuilder domainEventPersistenceBuilder)
+        public IBuilder UseEF() 
         {
-            _container.RegisterInstance(domainEventPersistenceBuilder).SingleInstance();
-            _container.RegisterType<EfUnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
             _container.RegisterType<RelationalTransaction>().As<IDbContextTransaction>().InstancePerLifetimeScope();
-            _container.RegisterDecorator(typeof(EfPersistDomainEventOnDbContextDecorator), typeof(DbContext));
+            _container.RegisterType<EfUnitOfWork>().As<IUnitOfWork>();
             return this;
         }
+
         public ProtossBuilder WithSeriLog(Serilog.ILogger logger)
         {
             var adapter = new SeriLogAdapter(logger);
@@ -48,14 +46,14 @@ namespace Protoss.Config
             _container.RegisterDecorator(typeof(LoggingCommandHandlerDecorator<>), typeof(ICommandHandler<>));
             return this;
         }
-        
-        
+
+
         public ProtossBuilder WithModule(IProtoss protoss)
         {
             RegisterDependency(protoss);
             return this;
         }
-        public ProtossBuilder WithAuthorizationModule(Type provider)  
+        public ProtossBuilder WithAuthorizationModule(Type provider)
         {
             _container.RegisterType(provider).As<IAuthorizationProvider>().InstancePerLifetimeScope();
             _container.RegisterType<AuthorizationInterceptor>().As<IInterceptor>();
@@ -69,8 +67,8 @@ namespace Protoss.Config
             _container.RegisterType<EventListener>().As<IEventListener>().InstancePerLifetimeScope();
             _container.RegisterType<EventPublisher>().As<IEventPublisher>().InstancePerLifetimeScope();
             _container.RegisterType<CommandBus>().As<ICommandBus>().InstancePerLifetimeScope();
-            _container.RegisterType<CommandHandlerResolver>().As<ICommandHandlerResolver>().InstancePerLifetimeScope();
             _container.RegisterGenericDecorator(typeof(TransactionalCommandHandlerDecorator<>), typeof(ICommandHandler<>));
+            _container.RegisterType<CommandHandlerResolver>().As<ICommandHandlerResolver>().InstancePerLifetimeScope();
             return _container;
         }
         private ISession CreateSession(SessionFactoryBuilder sessionFactory)
@@ -83,7 +81,7 @@ namespace Protoss.Config
         }
         private void RegisterDependency(IProtoss module)
         {
-             module.Register(new DependencyRegister(_container));
+            module.Register(new DependencyRegister(_container));
         }
     }
 }
