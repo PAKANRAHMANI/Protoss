@@ -39,7 +39,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Protoss.Testing.Core", "Src
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Protoss.Domain.Tests.Unit", "Test\Protoss.Domain.Tests.Unit\Protoss.Domain.Tests.Unit.csproj", "{4673B6AA-02FE-428D-8074-CCFFDE74FA9A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Protoss.Restful", "Src\Protoss.Restful\Protoss.Restful.csproj", "{1E900E62-0D52-44D6-B472-6BF8F40CBD89}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Protoss.Restful", "Src\Protoss.Restful\Protoss.Restful.csproj", "{1E900E62-0D52-44D6-B472-6BF8F40CBD89}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

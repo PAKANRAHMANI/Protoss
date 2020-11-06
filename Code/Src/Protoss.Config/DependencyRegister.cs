@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using Autofac;
-using Autofac.Core;
 using Autofac.Extras.DynamicProxy;
 using Protoss.Application.Contracts;
 using Protoss.Core;
@@ -35,6 +32,48 @@ namespace Protoss.Config
                 .Where(type => typeof(IQueryHandler<,>).IsAssignableFrom(type))
                 .AsImplementedInterfaces()
                 .InstancePerLifetimeScope();
+        }
+
+        public void RegisterScoped<TService>(Func<TService> factory, Action<TService> release = null)
+        {
+            var registration = _container.Register(a => factory.Invoke()).InstancePerLifetimeScope();
+            if (release != null)
+                registration.OnRelease(release);
+        }
+
+        public void RegisterScoped<TService>(Type implementationType)
+        {
+            _container.RegisterType(implementationType).As<TService>().InstancePerLifetimeScope();
+        }
+
+        public void RegisterScoped(Type implementationType)
+        {
+            _container.RegisterType(implementationType).InstancePerLifetimeScope();
+        }
+
+        public void RegisterScoped<TService, TImplementation>() where TImplementation : TService
+        {
+            _container.RegisterType<TImplementation>().As<TService>().InstancePerLifetimeScope();
+        }
+
+        public void RegisterSingleton<TService, TImplementation>() where TImplementation : TService
+        {
+            _container.RegisterType<TImplementation>().As<TService>().SingleInstance();
+        }
+
+        public void RegisterSingleton<TService, TInstance>(TInstance instance) where TService : class where TInstance : TService
+        {
+            _container.RegisterInstance<TService>(instance).SingleInstance();
+        }
+
+        public void RegisterTransient<TService, TImplementation>() where TImplementation : TService
+        {
+            _container.RegisterType<TImplementation>().As<TService>().InstancePerDependency();
+        }
+
+        public void RegisterDecorator<TService, TDecorator>() where TDecorator : TService
+        {
+            _container.RegisterDecorator<TDecorator, TService>();
         }
 
         public void RegisterRepositories(Assembly assembly)

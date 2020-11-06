@@ -9,7 +9,7 @@ namespace Protoss.DataAccess.EF
 {
     public abstract class EfRepository<TKey, T> : IRepository<TKey, T> where T : class, IAggregateRoot
     {
-        private readonly DbContext _dbContext;
+        protected readonly DbContext _dbContext;
 
         protected EfRepository(DbContext dbContext)
         {
@@ -18,7 +18,7 @@ namespace Protoss.DataAccess.EF
 
         public abstract Task<TKey> GetNextId();
 
-        public async Task Create(T aggregate)
+        public virtual async Task Create(T aggregate)
         {
             await _dbContext.Set<T>().AddAsync(aggregate);
         }

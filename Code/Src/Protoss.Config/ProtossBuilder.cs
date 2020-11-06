@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Data.SqlClient;
 using Autofac;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using NHibernate;
 using Protoss.Application;
 using Protoss.Application.Contracts;
@@ -31,10 +33,12 @@ namespace Protoss.Config
             return this;
         }
 
-        public IBuilder UseEF(DomainEventPersistenceBuilder domainEventPersistenceBuilder)
+        public IBuilder UseEF(IDomainEventPersistenceBuilder domainEventPersistenceBuilder)
         {
-            _container.RegisterInstance<IDomainEventPersistenceBuilder>(domainEventPersistenceBuilder).SingleInstance();
+            _container.RegisterInstance(domainEventPersistenceBuilder).SingleInstance();
             _container.RegisterType<EfUnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
+            _container.RegisterType<RelationalTransaction>().As<IDbContextTransaction>().InstancePerLifetimeScope();
+            _container.RegisterDecorator(typeof(EfPersistDomainEventOnDbContextDecorator), typeof(DbContext));
             return this;
         }
         public ProtossBuilder WithSeriLog(Serilog.ILogger logger)
