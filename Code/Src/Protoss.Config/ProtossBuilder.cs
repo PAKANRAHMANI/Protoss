@@ -12,6 +12,7 @@ using Protoss.Core.Events;
 using Protoss.DataAccess.EF;
 using Protoss.DataAccess.NH;
 using Protoss.Logging.SeriLog;
+using Protoss.Query;
 
 namespace Protoss.Config
 {
@@ -62,6 +63,7 @@ namespace Protoss.Config
 
         public ContainerBuilder Build()
         {
+            _container.RegisterType<QueryBus>().As<IQueryBus>().InstancePerLifetimeScope();
             _container.RegisterType<SystemDateTime>().As<IDateTime>().SingleInstance();
             _container.RegisterType<EventAggregator>().As<IEventAggregator>().InstancePerLifetimeScope();
             _container.RegisterType<EventListener>().As<IEventListener>().InstancePerLifetimeScope();
@@ -69,6 +71,7 @@ namespace Protoss.Config
             _container.RegisterType<CommandBus>().As<ICommandBus>().InstancePerLifetimeScope();
             _container.RegisterGenericDecorator(typeof(TransactionalCommandHandlerDecorator<>), typeof(ICommandHandler<>));
             _container.RegisterType<CommandHandlerResolver>().As<ICommandHandlerResolver>().InstancePerLifetimeScope();
+            _container.RegisterType<AutofacQueryHandlerResolver>().As<IQueryHandlerResolver>().InstancePerLifetimeScope();
             return _container;
         }
         private ISession CreateSession(SessionFactoryBuilder sessionFactory)

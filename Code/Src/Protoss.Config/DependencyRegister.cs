@@ -29,7 +29,7 @@ namespace Protoss.Config
         public void RegisterQueryHandlers(Assembly assembly)
         {
             _container.RegisterAssemblyTypes(assembly)
-                .Where(type => typeof(IQueryHandler<,>).IsAssignableFrom(type))
+                .AsClosedTypesOf(typeof(IQueryHandler<,>))
                 .AsImplementedInterfaces()
                 .InstancePerLifetimeScope();
         }
