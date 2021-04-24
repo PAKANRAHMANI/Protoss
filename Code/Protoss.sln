@@ -43,6 +43,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Protoss.Restful", "Src\Prot
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Protoss.Utility", "Src\Protoss.Utility\Protoss.Utility.csproj", "{66710C5F-2BD9-45EC-823C-DD1266AF3985}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Protoss.MongoDb", "Src\Protoss.MongoDb\Protoss.MongoDb.csproj", "{BF0260CF-CCF5-4BAC-90F9-BF811B092A15}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -115,6 +117,10 @@ Global
 		{66710C5F-2BD9-45EC-823C-DD1266AF3985}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66710C5F-2BD9-45EC-823C-DD1266AF3985}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66710C5F-2BD9-45EC-823C-DD1266AF3985}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF0260CF-CCF5-4BAC-90F9-BF811B092A15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF0260CF-CCF5-4BAC-90F9-BF811B092A15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF0260CF-CCF5-4BAC-90F9-BF811B092A15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF0260CF-CCF5-4BAC-90F9-BF811B092A15}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -137,6 +143,7 @@ Global
 		{4673B6AA-02FE-428D-8074-CCFFDE74FA9A} = {164B764B-2856-4EE7-8BC6-2E8EE4AD9320}
 		{1E900E62-0D52-44D6-B472-6BF8F40CBD89} = {25A183FD-7661-4697-96E4-895E57A64352}
 		{66710C5F-2BD9-45EC-823C-DD1266AF3985} = {25A183FD-7661-4697-96E4-895E57A64352}
+		{BF0260CF-CCF5-4BAC-90F9-BF811B092A15} = {25A183FD-7661-4697-96E4-895E57A64352}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FD22E860-CCCE-47C1-B1BE-51511F2D9BF8}

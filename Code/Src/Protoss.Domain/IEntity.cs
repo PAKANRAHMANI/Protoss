@@ -5,5 +5,10 @@ namespace Protoss.Domain
 {
     public interface IEntity
     {
+        bool IsDeleted { get; }
+
+        void MarkAsUpdated();
+
+        void MarkAsDeleted();
     }
 }
